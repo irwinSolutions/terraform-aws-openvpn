@@ -2,17 +2,10 @@ resource "aws_s3_bucket" "vpn" {
   bucket_prefix = "openvpn-${var.name}-"
 }
 
-resource "aws_s3_bucket_acl" "vpn" {
-  depends_on = [aws_s3_bucket_ownership_controls.vpn]
-
-  bucket = aws_s3_bucket.vpn.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_ownership_controls" "vpn" {
   bucket = aws_s3_bucket.vpn.id
   rule {
-    object_ownership = "BucketOwnerPreferred"
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
