@@ -46,6 +46,7 @@ resource "aws_autoscaling_group" "ecs" {
   default_cooldown          = var.autoscaling_default_cooldown
   lifecycle {
     create_before_destroy = true
+    ignore_changes        = [tag]
   }
 }
 
